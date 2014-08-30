@@ -53,7 +53,7 @@ public class CreateField : MonoBehaviour {
 	void OnGUI(){
 		
 		GUI.BeginGroup(new Rect(0, 100, 255, 300));
-		drawGUI();
+		DrawGUI();
 		GUI.EndGroup();
 		
 	}
@@ -61,7 +61,7 @@ public class CreateField : MonoBehaviour {
 	/*************************************************
 	*	GUI描画処理	
 	*************************************************/
-	private void drawGUI(){
+	private void DrawGUI(){
 		//Box表示
 		GUI.Box(new Rect(5, 30, 250, 400), "3x3FieldTest"); 
 		
