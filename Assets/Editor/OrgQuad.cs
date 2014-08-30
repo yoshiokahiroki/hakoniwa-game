@@ -1,0 +1,68 @@
+﻿using UnityEditor;//Edit
+using UnityEngine;
+using System.Collections;
+
+public class OrgQuad : MonoBehaviour {
+
+	[MenuItem("GameObject/Create Other/OrgQuad")]
+	// Use this for initialization
+
+	static void Create ()
+	{
+		GameObject obj = new GameObject("OrgQuad");
+		MeshRenderer meshRenderer = obj.AddComponent<MeshRenderer>();
+		meshRenderer.material = new Material (Shader.Find ("Diffuse"));
+
+		MeshFilter meshFilter = obj.AddComponent<MeshFilter>();
+
+		meshFilter.mesh = new Mesh ();
+		Mesh m = meshFilter.sharedMesh;
+		m.name = "OrgQuad";
+		//Mesh m = (Mesh)AssetDatabase.LoadAssetAtPath("Assets/OrgQuad.asset", typeof(Mesh));
+		//m = new Mesh();
+		//m.name = "SimplePlane";
+
+		Vector3[] vertices = new Vector3[]
+		{
+			new Vector3(-0.5f,  0.5f, 0.0f),
+			new Vector3( 0.5f,  0.5f, 0.0f),
+			new Vector3(-0.5f, -0.5f, 0.0f),
+			new Vector3( 0.5f, -0.5f, 0.0f)
+
+			//new Vector3 ( -0.5f , 0.0f ,  0.5f ) ,
+			//new Vector3 (  0.5f , 0.0f ,  0.5f ) ,
+			//new Vector3 (  0.5f , 0.0f , -0.5f ) ,
+			//new Vector3 ( -0.5f , 0.0f , -0.5f )
+		};
+		int[] triangles = new int[]
+		{
+			0, 1, 2,
+			3, 2, 1
+		};
+		Vector2[] uv = new Vector2[]
+		{
+			/*new Vector2(1.0f, 1.0f),
+			new Vector2(0.0f, 0.0f),
+			new Vector2(0.0f, 1.0f),
+			new Vector2(1.0f, 0.0f)
+			*/
+			new Vector2 (0.0f, 1.0f),
+			new Vector2 (1.0f, 1.0f),
+			new Vector2 (1.0f, 0.0f),
+			new Vector2 (0.0f, 0.0f)
+		};
+		m.vertices = vertices;
+		m.triangles = triangles;
+		m.uv = uv;
+		m.RecalculateNormals();
+		m.RecalculateBounds ();
+		m.Optimize();
+		
+		//AssetDatabase.CreateAsset(m, "Assets/OrgQuad.asset");
+		AssetDatabase.CreateAsset (m, "Assets/" + m.name + ".asset");
+		AssetDatabase.SaveAssets();
+
+
+	}
+
+}
